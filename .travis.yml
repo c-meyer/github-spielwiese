@@ -13,9 +13,9 @@ branches:
 
 # 1. Step:
 before_install:
-  pip install numpy
-  pip install setuptools
-  pip install sphinx
+  - "pip install numpy"
+  - "pip install setuptools"
+  - "pip install sphinx"
 
 # 2. Step:
 install: "python3 setup.py develop"
