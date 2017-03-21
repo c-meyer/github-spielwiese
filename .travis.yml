@@ -14,7 +14,7 @@ branches:
 # 1. Step:
 before_install:
   - "sudo apt-get install gfortran"
-  - "sudo apt-get install libhdf5-dev"
+  - "sudo apt-get install libhdf5-openmpi-dev"
   - "pip install numpy"
   - "pip install setuptools"
   - "pip install sphinx"
