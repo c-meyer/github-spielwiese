@@ -4,7 +4,6 @@ python:
 - '3.6'
 os:
   - linux
-  - osx
 
 
 branches:
@@ -12,29 +11,29 @@ branches:
   - master
   - "/^release-.*$/"
 before_install:
-- sudo apt-get install gfortran
-- sudo apt-get install libhdf5-serial-dev
-- pip install numpy
-- pip install scipy
-- pip install pandas
-- pip install matplotlib
-- pip install h5py
-- pip install setuptools
-- pip install sphinx
-- pip install sphinx_rtd_theme
-- pip install numpydoc
-- pip install nose
-install: python3 setup.py develop
+- "sudo apt-get install gfortran"
+- "sudo apt-get install libhdf5-serial-dev"
+- "pip install numpy"
+- "pip install scipy"
+- "pip install pandas"
+- "pip install matplotlib"
+- "pip install h5py"
+- "pip install setuptools"
+- "pip install sphinx"
+- "pip install sphinx_rtd_theme"
+- "pip install numpydoc"
+- "pip install nose"
+install: "python3 setup.py develop"
+
 script:
-   - nosetests
-   - cd docs
-   - make html
-   - cd ..
-   - python3 setup.py sdist
-   - ls dist
-   - python3 setup.py bdist_wheel
-   - ls build
-   skip_cleanup: true
+   - "nosetests"
+   - "cd docs"
+   - "make html"
+   - "cd .."
+   - "python3 setup.py sdist"
+   - "ls dist"
+   - "python3 setup.py bdist_wheel"
+   - "ls build"
 
 deploy:
   provider: releases
