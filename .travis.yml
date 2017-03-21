@@ -3,7 +3,7 @@ language: python
 python:
    - "3.5"
    - "3.6"
-   - "nightly"
+   # - "nightly"
 
 # safelist
 branches:
@@ -22,6 +22,8 @@ before_install:
   - "pip install h5py"
   - "pip install setuptools"
   - "pip install sphinx"
+  - "pip install numpydoc"
+  - "pip install nose"
 
 # 2. Step:
 install: "python3 setup.py develop"
@@ -32,7 +34,7 @@ install: "python3 setup.py develop"
 
 script:
   # unittests
-  # - "nosetests"
+   - "nosetests"
   # physical tests
   # - "cd tests"
   # - "python3 run_mechanical_system.py"
