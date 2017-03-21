@@ -13,6 +13,7 @@ branches:
 
 # 1. Step:
 before_install:
+  - "apt-get install gfortran"
   - "pip install numpy"
   - "pip install setuptools"
   - "pip install sphinx"
