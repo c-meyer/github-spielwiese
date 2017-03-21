@@ -6,7 +6,7 @@ environment:
 
 
 install:
-    - "set PATH=C:\Miniconda3-x64;C:\Miniconda3\Scripts;%PATH%"
+    - "set PATH=C:\\Miniconda3-x64;C:\\Miniconda3\\Scripts;%PATH%"
     - "conda install numpy"
     - "conda install scipy"
     - "conda install pandas"
