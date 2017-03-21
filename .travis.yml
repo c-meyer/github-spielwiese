@@ -1,0 +1,59 @@
+language: python
+
+python:
+   - "3.5"
+   - "3.6"
+   - "nightly"
+
+# safelist
+branches:
+   only:
+      - master
+      - /^release-.*$/
+
+# 1. Step:
+before_install:
+  pip install numpy
+  pip install setuptools
+  pip install sphinx
+
+# 2. Step:
+install: "python3 setup.py develop"
+
+# 3. Step:
+# before_script:
+# nothing
+
+script:
+  # unittests
+  # - "nosetests"
+  # physical tests
+  # - "cd tests"
+  # - "python3 run_mechanical_system.py"
+  # - "python3 run_mesh.py"
+  # - "cd .."
+  # doctest
+   - "cd docs"
+   - "make html"
+   - "cd .."
+  # build:
+   - "python3 setup.py sdist"
+
+# after_sucess:
+  # nothing
+
+# after_failure:
+  # nothing
+
+# NO DEPLOYMENT BEACAUSE TRAVIS ONLY ALLOWS DEPLOYMENT ON CERTAIN PROVIDERS
+# before_deploy:
+  # nothing
+
+#deploy:
+  # nothing
+
+#after_deploy:
+  # nothing
+
+# after_script:
+  #nothing
