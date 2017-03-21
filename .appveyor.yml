@@ -1,0 +1,30 @@
+environment:
+
+   matrix:
+
+      - PYTHON: "C:\\PYTHON35-x64"
+
+
+install:
+    - "%PYTHON%\\python.exe -m pip install numpy"
+    - "%PYTHON%\\python.exe -m pip install scipy"
+    - "%PYTHON%\\python.exe -m pip install pandas"
+    - "%PYTHON%\\python.exe -m pip install matplotlib"
+    - "%PYTHON%\\python.exe -m pip install h5py"
+    - "%PYTHON%\\python.exe -m pip install setuptools"
+    - "%PYTHON%\\python.exe -m pip install sphinx"
+    - "%PYTHON%\\python.exe -m pip install sphinx_rtd_theme"
+    - "%PYTHON%\\python.exe -m pip install numpydoc"
+    - "%PYTHON%\\python.exe -m pip install nose"
+    - "%PYTHON%\\python.exe setup.py develop"
+
+build: off
+
+test_script:
+  - "build.cmd nosetests"
+
+after_test:
+  - "build.cmd %PYTHON%\\python.exe setup.py bdist_wheel"
+
+artifacts:
+  - path: dist\*
