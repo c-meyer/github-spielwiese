@@ -1,75 +1,39 @@
 language: python
-
 python:
-   - "3.5"
-   - "3.6"
-   # - "nightly"
-
-# safelist
+- '3.5'
+- '3.6'
 branches:
-   only:
-      - master
-      - /^release-.*$/
-
-# 1. Step:
+  only:
+  - master
+  - "/^release-.*$/"
 before_install:
-  - "sudo apt-get install gfortran"
-  - "sudo apt-get install libhdf5-serial-dev"
-  - "pip install numpy"
-  - "pip install scipy"
-  - "pip install pandas"
-  - "pip install matplotlib"
-  - "pip install h5py"
-  - "pip install setuptools"
-  - "pip install sphinx"
-  - "pip install sphinx_rtd_theme"
-  - "pip install numpydoc"
-  - "pip install nose"
-
-# 2. Step:
-install: "python3 setup.py develop"
-
-# 3. Step:
-# before_script:
-# nothing
-
+- sudo apt-get install gfortran
+- sudo apt-get install libhdf5-serial-dev
+- pip install numpy
+- pip install scipy
+- pip install pandas
+- pip install matplotlib
+- pip install h5py
+- pip install setuptools
+- pip install sphinx
+- pip install sphinx_rtd_theme
+- pip install numpydoc
+- pip install nose
+install: python3 setup.py develop
 script:
-  # unittests
-   - "nosetests"
-  # physical tests
-  # - "cd tests"
-  # - "python3 run_mechanical_system.py"
-  # - "python3 run_mesh.py"
-  # - "cd .."
-  # doctest
-   - "cd docs"
-   - "make html"
-   - "cd .."
-  # build:
-   - "python3 setup.py sdist"
-   - "python3 setup.py bdist_wheel"
-
-# after_sucess:
-  # deploy on github
-
-# after_failure:
-  # nothing
-
-# NO DEPLOYMENT BEACAUSE TRAVIS ONLY ALLOWS DEPLOYMENT ON CERTAIN PROVIDERS
-# before_deploy:
-  # nothing
-
-#deploy:
-  # nothing
-  #provider: releases
-  #api_key:
-  #file:
-  #skip_cleanup: true
-  #on:
-  #  tags: true
-
-#after_deploy:
-  # nothing
-
-# after_script:
-  #nothing
+- nosetests
+- cd docs
+- make html
+- cd ..
+- python3 setup.py sdist
+- python3 setup.py bdist_wheel
+deploy:
+  provider: releases
+  api_key:
+    secure: vZmTMF/AggaC84MeRvikJDQlvbK1OjGo5nkO16uSOxfqsU2SXrXym3nL2bSrZnxHJYLrwPK5IK7QxsvWIMDMyqYZqrGvb1KOhzDfAdUM+QGYDVYMF7Rl69+H2DSJGoJb8ayzMBUG1glyuL7RyFkEIVdpjHVpw6+j6zQz5ttpYfm64yJaaVwqC+ywBcpWZOA4oxEuJHdJr2urvsrRLbBOeOS+qf0tWESVZ+2shOhuxUVR93D3VWxPVrqzjYYzqQmrDHpbounCsRKRBTsLA9ay1Np0vVo2d7+HbiO44ml3hyBKnhHQa6t8ashKJJ7CgD7fnPDrQQrts2mNDeuIBB9s5pTSwSGjCVxo2NXctJ69OrHnqgM4CwbclFbrCNs3X2cNz9pATjb2yWLwrLeGqroU2XIyETG+mFvR63sIdaJSvQb+pIjZgIkw9pVoQIwHueiciq9n5gB0x8OQE3gubiCpn2csj5/XSBCB44Qs3jNnm4qBdOAqUYgkPWxRm/+vKZxp/IiqCe57jzSqr2qgiVLbCAkYkg0B+uHn5CYEnZ/fQ7+8UrQ+ev8oSrZq1yav9uoxlqcffipUetKa6CmcrUXxJ4BCICd9M4NRKRSxdCAU8vqCSDYPwK+XuZOxaqhRF/Zo9ZRo4Nnomv8xTJTj3Tm0Lm0nv36maxwxKfo6tE1jNXQ=
+  file:
+      - "sdist/amfe-0.2.tar"
+  on:
+    tags: true
+    repo: c-meyer/github-spielwiese
+  skip_cleanup: true
