@@ -2,11 +2,17 @@ environment:
 
    matrix:
 
-      - PYTHON: "C:\\PYTHON35-x64"
+      - PYTHON_VERSION: 3.5
+        MINICONDA: C:\Miniconda3-x64
 
+init:
+   - "ECHO %PYTHON_VERSION% %MINICONDA%"
 
 install:
-    - "set PATH=C:\\Miniconda3-x64;C:\\Miniconda3\\Scripts;%PATH%"
+    - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+    - "conda config --set always_yes yes --set changeps1 no"
+    - "conda update -q conda"
+    - "conda info -a"
     - "conda install numpy"
     - "conda install scipy"
     - "conda install pandas"
