@@ -33,14 +33,15 @@ script:
    - "python3 setup.py sdist"
    - "ls dist"
    - "python3 setup.py bdist_wheel"
-   - "ls build"
+   - "ls dist"
 
 deploy:
   provider: releases
   api_key:
     secure: vZmTMF/AggaC84MeRvikJDQlvbK1OjGo5nkO16uSOxfqsU2SXrXym3nL2bSrZnxHJYLrwPK5IK7QxsvWIMDMyqYZqrGvb1KOhzDfAdUM+QGYDVYMF7Rl69+H2DSJGoJb8ayzMBUG1glyuL7RyFkEIVdpjHVpw6+j6zQz5ttpYfm64yJaaVwqC+ywBcpWZOA4oxEuJHdJr2urvsrRLbBOeOS+qf0tWESVZ+2shOhuxUVR93D3VWxPVrqzjYYzqQmrDHpbounCsRKRBTsLA9ay1Np0vVo2d7+HbiO44ml3hyBKnhHQa6t8ashKJJ7CgD7fnPDrQQrts2mNDeuIBB9s5pTSwSGjCVxo2NXctJ69OrHnqgM4CwbclFbrCNs3X2cNz9pATjb2yWLwrLeGqroU2XIyETG+mFvR63sIdaJSvQb+pIjZgIkw9pVoQIwHueiciq9n5gB0x8OQE3gubiCpn2csj5/XSBCB44Qs3jNnm4qBdOAqUYgkPWxRm/+vKZxp/IiqCe57jzSqr2qgiVLbCAkYkg0B+uHn5CYEnZ/fQ7+8UrQ+ev8oSrZq1yav9uoxlqcffipUetKa6CmcrUXxJ4BCICd9M4NRKRSxdCAU8vqCSDYPwK+XuZOxaqhRF/Zo9ZRo4Nnomv8xTJTj3Tm0Lm0nv36maxwxKfo6tE1jNXQ=
   file:
-      - "dist/amfe-0.2.tar"
+      - "dist/amfe-0.2.tar.gz"
+      #- "dist/amfe-0.2.whl"
   on:
     # tags: true
     repo: c-meyer/github-spielwiese
