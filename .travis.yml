@@ -22,6 +22,7 @@ before_install:
   - "pip install h5py"
   - "pip install setuptools"
   - "pip install sphinx"
+  - "pip install sphinx_rtd_theme"
   - "pip install numpydoc"
   - "pip install nose"
 
@@ -46,9 +47,10 @@ script:
    - "cd .."
   # build:
    - "python3 setup.py sdist"
+   - "python3 setup.py bdist_wheel"
 
 # after_sucess:
-  # nothing
+  # deploy on github
 
 # after_failure:
   # nothing
@@ -59,6 +61,12 @@ script:
 
 #deploy:
   # nothing
+  #provider: releases
+  #api_key:
+  #file:
+  #skip_cleanup: true
+  #on:
+  #  tags: true
 
 #after_deploy:
   # nothing
