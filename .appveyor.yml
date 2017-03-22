@@ -4,7 +4,7 @@ environment:
 
       - PYTHON_VERSION: 3.5
         MINICONDA: C:\Miniconda3-x64
-        MINGWDIR: C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1
+        MINGWDIR: C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1\mingw64
 
 init:
    - "ECHO %PYTHON_VERSION% %MINICONDA%"
@@ -14,32 +14,35 @@ install:
     - "set PATH=%MINGWDIR%;%MINGWDIR%\\bin;%PATH%"
     - "cd C:\\mingw-w64\\x86_64-6.3.0-posix-seh-rt_v5-rev1\\mingw64"
     - "dir"
-    - "cd bin"
+    - "cd include"
     - "dir"
-    #- "conda config --set always_yes yes --set changeps1 no"
-    #- "conda update -q conda"
-    #- "conda info -a"
-    #- "conda install numpy"
-    #- "conda install scipy"
-    #- "conda install pandas"
-    #- "conda install matplotlib"
-    #- "conda install h5py"
-    #- "conda install setuptools"
-    #- "conda install sphinx"
-    #- "conda install sphinx_rtd_theme"
-    #- "conda install numpydoc"
-    #- "conda install nose"
-    #- "python setup.py develop"
+    - "cd .."
+    - "cd lib"
+    - "dir"
+    - "conda config --set always_yes yes --set changeps1 no"
+    - "conda update -q conda"
+    - "conda info -a"
+    - "conda install numpy"
+    - "conda install scipy"
+    - "conda install pandas"
+    - "conda install matplotlib"
+    - "conda install h5py"
+    - "conda install setuptools"
+    - "conda install sphinx"
+    - "conda install sphinx_rtd_theme"
+    - "conda install numpydoc"
+    - "conda install nose"
+    - "python setup.py develop"
 
 build: off
 
-#test_script:
-  #- "build.cmd nosetests"
+test_script:
+  - "build.cmd nosetests"
 
-#after_test:
-  #- "build.cmd %PYTHON%\\python.exe setup.py bdist_wheel"
+after_test:
+  - "build.cmd %PYTHON%\\python.exe setup.py bdist_wheel"
 
-#artifacts:
-  #- path: dist\*
+artifacts:
+  - path: dist\*
 
 #on_success:
