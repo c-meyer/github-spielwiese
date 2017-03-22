@@ -46,6 +46,6 @@ deploy:
       - "dist/amfe-0.2.tar.gz"
       - "dist/amfe-0.2-cp${PYDIST}-cp${PYDIST}m-linux_x86_64.whl"
   on:
-    # tags: true
+    tags: true
     repo: c-meyer/github-spielwiese
   skip_cleanup: true
