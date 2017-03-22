@@ -37,7 +37,8 @@ install:
     #- "conda install numpydoc"
     #- "conda install nose"
     #- "cd AppVeyor"
-
+    - "cd %MINICONDA%\\envs\\test-environment"
+    - "dir"
     - "cd AppVeyor"
     - "copy /Y distutils.cfg %MINICONDA%\\Lib\\distutils\\distutils.cfg"
     - "copy /Y cygwinccompiler.py %MINICONDA%\\Lib\\distutils\\cygwinccompiler.py"
