@@ -4,12 +4,14 @@ matrix:
    include:
       - os: linux
         python: 3.5
-        env: PYDIST=35
-        env: PYCONDA=3.5
+        env:
+          - PYDIST=35
+          - PYCONDA=3.5
       - os: linux
         python: 3.6
-        env: PYCONDA=3.6
-        env: PYDIST=36
+        env:
+          - PYCONDA=3.6
+          - PYDIST=36
 
 branches:
   only:
@@ -40,7 +42,6 @@ script:
    - "ls dist"
    - "python setup.py bdist_wheel"
    - "ls dist"
-   - source deactivate
 
 deploy:
   provider: releases
