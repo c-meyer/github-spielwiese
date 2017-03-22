@@ -38,6 +38,7 @@ install:
     #- "conda install nose"
     #- "cd AppVeyor"
 
+    - "cd AppVeyor"
     - "copy /Y distutils.cfg %MINICONDA%\\Lib\\distutils\\distutils.cfg"
     - "copy /Y cygwinccompiler.py %MINICONDA%\\Lib\\distutils\\cygwinccompiler.py"
     - "copy /Y mingw32ccompiler.py %MINICONDA%\\Lib\\site-packages\\numpy\\distutils\\mingw32ccompiler.py"
