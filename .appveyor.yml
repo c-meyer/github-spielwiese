@@ -43,10 +43,10 @@ install:
 build: off
 
 test_script:
-  - "build.cmd nosetests"
+  - "nosetests"
 
 after_test:
-  - "build.cmd %PYTHON%\\python.exe setup.py bdist_wheel"
+  - "python setup.py bdist_wheel"
 
 artifacts:
   - path: dist\*
