@@ -16,7 +16,7 @@ install:
     - "dir"
     - "cd AppVeyor"
     - "copy /Y distutils.cfg %MINICONDA%\\Lib\\distutils\\distutils.cfg"
-    - "copy /Y cygwincompiler.py %MINICONDA%\\Lib\\distutils\\cygwincompiler.py"
+    - "copy /Y cygwinccompiler.py %MINICONDA%\\Lib\\distutils\\cygwinccompiler.py"
     - "copy /Y mingw32ccompiler.py %MINICONDA%\\Lib\\site-packages\\numpy\\distutils\\mingw32ccompiler.py"
     - "cd .."
     #- "cd C:\\mingw-w64\\x86_64-6.3.0-posix-seh-rt_v5-rev1\\mingw64"
