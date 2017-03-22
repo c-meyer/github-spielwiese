@@ -11,7 +11,7 @@ init:
 
 install:
     - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
-    - "set PATH=%MINGWDIR%;%MINGWDIR\\bin;%PATH%"
+    - "set PATH=%MINGWDIR%;%MINGWDIR%\\bin;%PATH%"
     - "conda config --set always_yes yes --set changeps1 no"
     - "conda update -q conda"
     - "conda info -a"
