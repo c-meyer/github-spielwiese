@@ -53,4 +53,7 @@ deploy:
   on:
     tags: true
     repo: c-meyer/github-spielwiese
+    branch:
+      - master
+      - "/^release-.*$"
   skip_cleanup: true
