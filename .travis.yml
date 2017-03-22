@@ -17,6 +17,7 @@ branches:
   only:
   - master
   - "/^release-.*$/"
+  - "/^v[0-9\.]+/"
 before_install:
 - "sudo apt-get install gfortran"
 #- "sudo apt-get install libhdf5-serial-dev"
