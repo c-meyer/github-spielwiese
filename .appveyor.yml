@@ -70,7 +70,7 @@ deploy:
    provider: GitHub
    auth_token:
      secure: 9w2YwyYMLgiROCNPdsBTFr4n8/6nY67EmD+R1sE8gqVfo0FA9yJ3kq/1JqtBcxIg
-   artifact: /^dist\\amfe.*whl$/
+   #artifact: /^dist\\amfe.*whl$/
    on:
      # branch condition deactivated becaus cannot be used with appveyor_repo_tag:true
      # branch:
