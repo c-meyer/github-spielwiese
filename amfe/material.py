@@ -1,12 +1,20 @@
+# Copyright (c) 2017, Lehrstuhl fuer Angewandte Mechanik, Technische
+# Universitaet Muenchen.
+#
+# Distributed under BSD-3-Clause License. See LICENSE-File for more information
+#
 """
 Module for material handling withing the FE context.
 
 Up to now, only Hyperelastic materials are implemented. Hyperelastic Materials
-are Materials, where the constitutive law can be expressed such, that the second
-Piola-Kirchhoff stress tensor S is a function of the Green-Lagrange strain
-tensor E. This computation is carried out in this module.
+are Materials, where the constitutive law can be expressed such, that the
+second Piola-Kirchhoff stress tensor S is a function of the Green-Lagrange
+strain tensor E. This computation is carried out in this module.
 
 """
+
+import numpy as np
+
 
 __all__ = ['HyperelasticMaterial',
            'KirchhoffMaterial',
@@ -15,7 +23,6 @@ __all__ = ['HyperelasticMaterial',
            'MooneyRivlin',
            ]
 
-import numpy as np
 
 use_fortran = False
 
@@ -27,7 +34,7 @@ except Exception:
 Python was not able to load the fast fortran material routines.
 ''')
 
-#use_fortran = False
+# use_fortran = False
 
 
 class HyperelasticMaterial():
@@ -89,6 +96,7 @@ class HyperelasticMaterial():
         '''
         pass
 
+
 class KirchhoffMaterial(HyperelasticMaterial):
     r'''
     Kirchhoff-Material that mimicks the linear elastic behavior.
@@ -96,7 +104,8 @@ class KirchhoffMaterial(HyperelasticMaterial):
     The strain energy potential is
 
     .. math::
-        W(E) = \frac{\lambda}{2}trace(\mathbf{E})^2 + \mu*trace(\mathbf{E}^2)
+        W(E) = \frac{\lambda}{2} \mathrm{tr}\,(\mathbf{E})^2 + \
+        \mu \cdot \mathrm{tr}\,(\mathbf{E}^2)
 
     with:
         :math:`W` = strain energy potential
@@ -137,6 +146,14 @@ class KirchhoffMaterial(HyperelasticMaterial):
         self.thickness = thickness
         self._update_variables()
 
+    def __repr__(self):
+        '''
+        repr(obj) function for smart representing for debugging
+        '''
+        return 'amfe.material.KirchhoffMaterial(%f,%f,%f,%s,%f)'\
+            % (self.E_modulus, self.nu, self.rho,
+               str(self.plane_stress), self.thickness)
+
     def _update_variables(self):
         '''
         Update internal variables...
@@ -145,7 +162,7 @@ class KirchhoffMaterial(HyperelasticMaterial):
         nu = self.nu
         # The two lame constants:
         lam = nu*E / ((1 + nu) * (1 - 2*nu))
-        mu  = E / (2*(1 + nu))
+        mu = E / (2*(1 + nu))
         self.C_SE = np.array([[lam + 2*mu, lam, lam, 0, 0, 0],
                               [lam, lam + 2*mu, lam, 0, 0, 0],
                               [lam, lam, lam + 2*mu, 0, 0, 0],
@@ -161,7 +178,6 @@ class KirchhoffMaterial(HyperelasticMaterial):
             self.C_SE_2d = np.array([[lam + 2*mu, lam, 0],
                                      [lam, lam + 2*mu, 0],
                                      [0, 0, mu]])
-
 
     def S_Sv_and_C(self, E):
         '''
@@ -185,8 +201,9 @@ class KirchhoffMaterial(HyperelasticMaterial):
 # For simplicity: rename KirchhoffMaterial
 LinearMaterial = KirchhoffMaterial
 
+
 #%%
-# @inherit_docs(HyperelasticMaterial)
+
 class NeoHookean(HyperelasticMaterial):
     r'''
     Neo-Hookean hyperelastic material. It is the same material as the Mooney-
@@ -221,8 +238,15 @@ class NeoHookean(HyperelasticMaterial):
         self.plane_stress = plane_stress
         if plane_stress:
             raise ValueError('Attention! plane stress is not supported yet \
-within the MooneyRivlin material!')
+within the NeoHookean material!')
 
+    def __repr__(self):
+        '''
+        repr(obj) function for smart representing for debugging
+        '''
+        return 'amfe.material.NeoHookeanMaterial(%f,%f,%f,%s,%f)'\
+            % (self.mu, self.kappa, self.rho,
+               str(self.plane_stress), self.thickness)
 
     def S_Sv_and_C(self, E):
         ''' '''
@@ -388,6 +412,13 @@ class MooneyRivlin(HyperelasticMaterial):
             raise ValueError('Attention! plane stress is not supported yet \
             within the MooneyRivlin material!')
 
+    def __repr__(self):
+        '''
+        repr(obj) function for smart representing for debugging
+        '''
+        return 'amfe.material.MooneyRivlin(%f,%f,%f,%f,%s,%f)'\
+            % (self.A10, self.A01, self.kappa, self.rho,
+               str(self.plane_stress), self.thickness)
 
     def S_Sv_and_C(self, E):
         '''
@@ -556,8 +587,12 @@ if use_fortran:
     def neo_hookean_S_Sv_and_C(self, E):
         return f90_material.neo_hookean_s_sv_and_c(E, self.mu, self.kappa)
 
+    def neo_hookean_S_Sv_and_C_2d(self, E):
+        return f90_material.neo_hookean_s_sv_and_c_2d(E, self.mu, self.kappa)
+
     # overloading the functions
     KirchhoffMaterial.S_Sv_and_C = kirchhoff_S_Sv_and_C
     KirchhoffMaterial.S_Sv_and_C_2d = kirchhoff_S_Sv_and_C_2d
     MooneyRivlin.S_Sv_and_C = mooney_rivlin_S_Sv_and_C
     NeoHookean.S_Sv_and_C = neo_hookean_S_Sv_and_C
+    NeoHookean.S_Sv_and_C_2d = neo_hookean_S_Sv_and_C_2d

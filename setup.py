@@ -77,7 +77,7 @@ config = {
     'maintainer_email': 'christian.meyer@tum.de',
     'install_requires': ['numpy>=1.10', 'scipy>=0.17', 'pandas',
                          'h5py', 'matplotlib'],
-    'tests_require': ['nose', 'sphinx==1.3.1'],
+    'tests_require': ['nose', 'sphinx==1.3.1', 'sphinx_rtd_theme'],
     'packages': ['amfe'],
     'scripts': [],
     'entry_points': {},
@@ -111,11 +111,18 @@ if __name__ == '__main__':
         try:
             from setuptools import setup
             from numpy.distutils.core import Extension, setup
+            ext_assembly = Extension(name='amfe.f90_assembly',
+                                     sources=['amfe/fortran/assembly.f90'],
+                                     language='f90',)
+            ext_element = Extension(name='amfe.f90_element',
+                                    sources=['amfe/fortran/element.pyf',
+                                             'amfe/fortran/element.f90'],
+                                    language='f90',)
             ext_material = Extension(name='amfe.f90_material',
                                      sources=['amfe/fortran/material.f90'],
                                      language='f90',)
 
-            ext_modules = [ext_material]
+            ext_modules = [ext_assembly, ext_element, ext_material]
 
             setup(ext_modules=ext_modules, **config)
 

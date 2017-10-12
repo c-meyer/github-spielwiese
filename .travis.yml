@@ -5,8 +5,8 @@ matrix:
       - os: linux
         python: 3.5
         env:
-          - PYDIST=35
           - PYCONDA=3.5
+          - PYDIST=35
       - os: linux
         python: 3.6
         env:
