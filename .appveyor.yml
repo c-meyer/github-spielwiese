@@ -9,15 +9,17 @@ environment:
 
    matrix:
 
+      - PYTHON_VERSION: 3.6
+        PYDIST: 36
+        MINICONDA: C:\Miniconda3-x64
+        MINGWDIR: C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1\mingw64
+
       - PYTHON_VERSION: 3.5
         PYDIST: 35
         MINICONDA: C:\Miniconda3-x64
         MINGWDIR: C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1\mingw64
 
-      - PYTHON_VERSION: 3.6
-        PYDIST: 36
-        MINICONDA: C:\Miniconda3-x64
-        MINGWDIR: C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1\mingw64
+
 
 
 init:
