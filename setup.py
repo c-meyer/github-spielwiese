@@ -61,30 +61,7 @@ def query_yes_no(question, default="yes"):
             sys.stdout.write("Please respond with 'yes' or 'no'.\n")
 
 
-config = {
-    'name': 'amfe',
-    'version': '0.2',
-    'description': 'Nonlinear Finite Element Code with simplicity in mind.',
-    'long_description': 'Nonlinear Finite Element Code for \
-    Structural Dynamics. \
-    This code includes Model Order Reduction Techniques for nonlinear Systems \
-    such as DEIM or ECSW.',
-    'author': 'Johannes Rutzmoser',
-    'url': 'https://github.com/tum-am/amfe',
-    'download_url': 'Where to download it.',
-    'author_email': 'johannes.rutzmoser@tum.de',
-    'maintainer': 'Christian Meyer',
-    'maintainer_email': 'christian.meyer@tum.de',
-    'install_requires': ['numpy>=1.10', 'scipy>=0.17', 'pandas',
-                         'h5py', 'matplotlib'],
-    'tests_require': ['nose', 'sphinx==1.3.1', 'sphinx_rtd_theme'],
-    'packages': ['amfe'],
-    'scripts': [],
-    'entry_points': {},
-    'provides': 'amfe',
-    'platforms': 'Linux, Windows',
-    'license': 'BSD3-License'
-}
+
 
 no_fortran_str = '''
 
@@ -102,14 +79,39 @@ no_extension_str = '''
 '''
 
 if __name__ == '__main__':
+    from setuptools import setup, find_packages
+    config = {
+    'name': 'amfe',
+    'version': '0.2',
+    'description': 'Nonlinear Finite Element Code with simplicity in mind.',
+    'long_description': 'Nonlinear Finite Element Code for \
+    Structural Dynamics. \
+    This code includes Model Order Reduction Techniques for nonlinear Systems \
+    such as DEIM or ECSW.',
+    'author': 'Johannes Rutzmoser',
+    'url': 'https://github.com/tum-am/amfe',
+    'download_url': 'Where to download it.',
+    'author_email': 'johannes.rutzmoser@tum.de',
+    'maintainer': 'Christian Meyer',
+    'maintainer_email': 'christian.meyer@tum.de',
+    'install_requires': ['numpy>=1.10', 'scipy>=0.17', 'pandas',
+                         'h5py', 'matplotlib'],
+    'tests_require': ['nose', 'sphinx==1.3.1', 'sphinx_rtd_theme'],
+    #'packages': ['amfe'],
+    'packages': find_packages(),
+    'scripts': [],
+    'entry_points': {},
+    'provides': 'amfe',
+    'platforms': 'Linux, Windows',
+    'license': 'BSD3-License'
+    }
+    
     if 'no_fortran' in sys.argv:
         sys.argv.remove('no_fortran')
         print(no_fortran_str)
-        from setuptools import setup
         setup(**config)
     else:
         try:
-            from setuptools import setup
             from numpy.distutils.core import Extension, setup
             ext_assembly = Extension(name='amfe.f90_assembly',
                                      sources=['amfe/fortran/assembly.f90'],
